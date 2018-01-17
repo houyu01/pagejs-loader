@@ -1,0 +1,11 @@
+{
+  "name": "pagejs-loader",
+  "version": "1.0.1",
+  "description": "a page init loader",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "houyu (785798835@qq.com)",
+  "license": "MIT"
+}
