@@ -1,6 +1,6 @@
 {
   "name": "pagejs-loader",
-  "version": "1.0.1",
+  "version": "1.0.7",
   "description": "a page init loader",
   "main": "index.js",
   "scripts": {
