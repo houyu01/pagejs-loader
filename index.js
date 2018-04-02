@@ -4,9 +4,16 @@
  */
 module.exports = function (source, other) {
     var query = this.query.replace('?', '');
-    var configPath = query.replace('configPath=', '');
+    var paramsMap = {};
+    var params = query.split('&').forEach(function (paramsSeg) {
+        var paramStructure = paramsSeg.split('=');
+        paramsMap[paramStructure[0]] = paramStructure[1];
+    });
+    var configPath = paramsMap['configPath'];
+    var workRootStructure = /\/([^\/]*?)\/?$/g.exec(paramsMap['workPath']);
+    var workDir = workRootStructure ? workRootStructure[1] : '';
     var config = require(configPath);
-    var path = /workspace\/(.*).js$/;
+    var path = new RegExp(workDir + '\/(.*).js$', 'g');
     var queryStructure = path.exec(this.resourcePath.replace(/\\/ig, '/'));
     var queryPath = '';
     if (queryStructure) {
