@@ -2,6 +2,10 @@
  * use to generate a PageDefine wrapper
  * @author houyu(785798835@qq.com)
  */
+function isSelfExecuteFile(filename, config) {
+    return !!~config.pages.indexOf(filename) || !!~filename.indexOf('app.js');
+}
+
 module.exports = function (source, other) {
     var query = this.query.replace('?', '');
     var paramsMap = {};
@@ -22,7 +26,7 @@ module.exports = function (source, other) {
     else {
         return source;
     }
-    var supplement = !!~config.pages.indexOf(queryPath) ? `window.require('${queryPath}');` : '';
+    var supplement = isSelfExecuteFile(queryPath, config) ? `window.require('${queryPath}');` : '';
     var startTpl = `window.define('${queryPath}', function (require, module, exports, define, Page, swan, getApp, window, document, frames, self, location, navigator, localStorage, history, Caches) {`;
     var endTpl = `});${supplement}`;
     return startTpl + source + endTpl;
