@@ -3,7 +3,7 @@
  * @author houyu(785798835@qq.com)
  */
 function isSelfExecuteFile(filename, config) {
-    return !!~config.pages.indexOf(filename) || !!~filename.indexOf('app.js');
+    return !!~config.pages.indexOf(filename) || /app$/.exec(filename);
 }
 
 module.exports = function (source, other) {
